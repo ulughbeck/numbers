@@ -7,11 +7,14 @@ import 'package:numbers/app_basic/home3.dart';
 import 'package:numbers/app_basic/home4.dart';
 
 class BasicApp extends StatelessWidget {
+  const BasicApp({Key? key}) : super(key: key);
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     //* <HTML>
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Numbers',
 
       // step 1
@@ -31,34 +34,36 @@ class BasicApp extends StatelessWidget {
 
 // Starting point explaining hierarchy of widgets
 class HomePage extends StatelessWidget {
+  const HomePage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     //* <BODY>
     return Scaffold(
       //* <HEADER>
       appBar: AppBar(
-        title: Text('Numbers API'),
+        title: const Text('Numbers API'),
       ),
       //* <CONTENT>
       body: Container(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           children: <Widget>[
-            SizedBox(height: 50),
+            const SizedBox(height: 50),
 
             //? number trivia
-            Text(
+            const Text(
               'Start searching!',
               style: TextStyle(fontSize: 30),
             ),
 
-            SizedBox(height: 50),
+            const SizedBox(height: 50),
 
             //? input
             TextField(
               keyboardType: TextInputType.number,
-              inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
-              decoration: InputDecoration(
+              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+              decoration: const InputDecoration(
                 border: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.blue),
                 ),
@@ -66,17 +71,17 @@ class HomePage extends StatelessWidget {
               ),
             ),
 
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
 
             //? buttons
 
             //1 button
-            RaisedButton(
-              child: Text(
+            ElevatedButton(
+              child: const Text(
                 'Search',
                 style: TextStyle(color: Colors.white),
               ),
-              color: Colors.blue,
+              style: ElevatedButton.styleFrom(primary: Colors.blue),
               onPressed: () {
                 //todo
               },
@@ -86,25 +91,25 @@ class HomePage extends StatelessWidget {
             Row(
               children: <Widget>[
                 Expanded(
-                  child: RaisedButton(
-                    child: Text(
+                  child: ElevatedButton(
+                    child: const Text(
                       'Search',
                       style: TextStyle(color: Colors.white),
                     ),
-                    color: Colors.blue,
+                    style: ElevatedButton.styleFrom(primary: Colors.blue),
                     onPressed: () {
                       //todo
                     },
                   ),
                 ),
-                SizedBox(width: 16),
+                const SizedBox(width: 16),
                 Expanded(
-                  child: RaisedButton(
-                    child: Text(
+                  child: ElevatedButton(
+                    child: const Text(
                       'Random Number',
                       style: TextStyle(color: Colors.white),
                     ),
-                    color: Colors.blueGrey,
+                    style: ElevatedButton.styleFrom(primary: Colors.blueGrey),
                     onPressed: () {
                       //todo
                     },

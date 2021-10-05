@@ -9,7 +9,9 @@ class NumberBloc {
 
   // State
   final _state = StreamController<NumberState>();
+
   Stream<NumberState> get state => _state.stream;
+
   void _setState(NumberState state) {
     _state.sink.add(state);
   }
@@ -19,7 +21,8 @@ class NumberBloc {
       NumberInitialState(message: 'Start searching!');
 
   // input
-  String _numberInput;
+  String? _numberInput;
+
   setNumberInput(String value) {
     _numberInput = value;
   }
@@ -27,10 +30,11 @@ class NumberBloc {
   // Actions
 
   /// search for number provided in input
-  Future<void> searchNumber() {
+  Future<void>? searchNumber() {
     //validation of input
-    if (_numberInput != null && _numberInput.length > 0)
-      return _performSearch(_api.searchNumberAPI(number: _numberInput));
+    if (_numberInput != null && _numberInput!.isNotEmpty) {
+      return _performSearch(_api.searchNumberAPI(number: _numberInput ?? ''));
+    }
 
     return null;
   }
@@ -48,8 +52,9 @@ class NumberBloc {
       final result = await searchFunction;
 
       //if success result was received change state to successfull / loaded
-      if (result is NumberModel)
+      if (result is NumberModel) {
         _setState(NumberLoadedState(numberModel: result));
+      }
     } on NumberException catch (e) {
       //if error / exception occured during call change state to error
       _setState(NumberErrorState(errorMessage: e.message));
@@ -66,7 +71,7 @@ class NumberBloc {
 class NumberState {}
 
 class NumberInitialState extends NumberState {
-  final String message;
+  final String? message;
 
   NumberInitialState({this.message});
 }
@@ -74,13 +79,13 @@ class NumberInitialState extends NumberState {
 class NumberLoadingState extends NumberState {}
 
 class NumberLoadedState extends NumberState {
-  final NumberModel numberModel;
+  final NumberModel? numberModel;
 
   NumberLoadedState({this.numberModel});
 }
 
 class NumberErrorState extends NumberState {
-  final String errorMessage;
+  final String? errorMessage;
 
   NumberErrorState({this.errorMessage});
 }

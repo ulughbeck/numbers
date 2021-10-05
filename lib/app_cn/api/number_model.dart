@@ -1,10 +1,10 @@
 class NumberModel {
-  String text;
-  int number;
+  String? text;
+  int? number;
 
   NumberModel({
-    String text,
-    int number,
+    String? text,
+    int? number,
   });
 
   NumberModel.fromJson(Map<String, dynamic> json) {

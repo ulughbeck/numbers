@@ -2,22 +2,24 @@ name: numbers
 description: Numbers - Flutter Samples
 author: Ulugbek Isroilov<inulugbek@gmail.com>
 
-version: 1.0.0+1
+version: 1.0.1+2
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
 
-  provider: ^3.2.0
-  http: ^0.12.0+2
+  http: ^0.13.3
+  provider: ^6.0.1
+  cupertino_icons: ^1.0.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
+  flutter_lints: ^1.0.0
 
 flutter:
   uses-material-design: true

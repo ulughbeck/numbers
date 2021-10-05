@@ -29,7 +29,7 @@ class HomePage1 extends StatelessWidget {
             //input
             TextField(
               keyboardType: TextInputType.number,
-              inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
+              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
               decoration: InputDecoration(
                 border: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.blue),
@@ -44,12 +44,12 @@ class HomePage1 extends StatelessWidget {
             Row(
               children: <Widget>[
                 Expanded(
-                  child: RaisedButton(
+                  child: ElevatedButton(
                     child: Text(
                       'Search',
                       style: TextStyle(color: Colors.white),
                     ),
-                    color: Colors.blue,
+                    style: ElevatedButton.styleFrom(primary: Colors.blue),
                     onPressed: () {
                       //todo
                     },
@@ -57,12 +57,12 @@ class HomePage1 extends StatelessWidget {
                 ),
                 SizedBox(width: 16),
                 Expanded(
-                  child: RaisedButton(
+                  child: ElevatedButton(
                     child: Text(
                       'Random Number',
                       style: TextStyle(color: Colors.white),
                     ),
-                    color: Colors.blueGrey,
+                    style: ElevatedButton.styleFrom(primary: Colors.blueGrey),
                     onPressed: () {
                       //todo
                     },

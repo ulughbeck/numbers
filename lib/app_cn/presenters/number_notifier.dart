@@ -9,33 +9,39 @@ class NumberNotifier extends ChangeNotifier {
 
   // State
   NumberState _state = NumberState.initial;
+
   NumberState get state => _state;
+
   void _setState(NumberState state) {
     _state = state;
     notifyListeners();
   }
 
   // input
-  String _numberInput;
+  String? _numberInput;
+
   setNumberInput(String value) {
     _numberInput = value;
   }
 
   // Number model
-  NumberModel _numberModel;
-  NumberModel get numberModel => _numberModel;
+  NumberModel? _numberModel;
+
+  NumberModel? get numberModel => _numberModel;
 
   // Error message
-  NumberException _exception;
-  String get error => _exception.message;
+  NumberException? _exception;
+
+  String? get error => _exception?.message;
 
   // Actions
 
   /// search for number provided in input
-  Future<void> searchNumber() {
+  Future<void>? searchNumber() {
     //validation of input
-    if (_numberInput != null && _numberInput.length > 0)
-      return _performSearch(_api.searchNumberAPI(number: _numberInput));
+    if (_numberInput != null && _numberInput!.isNotEmpty) {
+      return _performSearch(_api.searchNumberAPI(number: _numberInput ?? ''));
+    }
 
     return null;
   }

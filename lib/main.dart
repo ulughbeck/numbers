@@ -4,14 +4,15 @@ import 'package:numbers/app_basic/app.dart';
 import 'package:numbers/app_bloc/app.dart';
 import 'package:numbers/app_cn/app.dart';
 
-void main() {
-  runApp(FlutterExamplesApp());
-}
+void main() => runApp(const FlutterExamplesApp());
 
 class FlutterExamplesApp extends StatelessWidget {
+  const FlutterExamplesApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Numbers',
       home: FlutterExamplesPage(),
     );
@@ -19,28 +20,30 @@ class FlutterExamplesApp extends StatelessWidget {
 }
 
 class FlutterExamplesPage extends StatelessWidget {
+  const FlutterExamplesPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Flutter Example apps'),
+        title: const Text('Flutter Example apps'),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            RaisedButton(
-              child: Text('Basic App'),
+            ElevatedButton(
+              child: const Text('Basic App'),
               onPressed: () => _openExampleApp(context, BasicApp()),
             ),
-            SizedBox(height: 10),
-            RaisedButton(
-              child: Text('App with ChangeNotifier'),
+            const SizedBox(height: 10),
+            ElevatedButton(
+              child: const Text('App with ChangeNotifier'),
               onPressed: () => _openExampleApp(context, CnApp()),
             ),
-            SizedBox(height: 10),
-            RaisedButton(
-              child: Text('App with BLoC'),
+            const SizedBox(height: 10),
+            ElevatedButton(
+              child: const Text('App with BLoC'),
               onPressed: () => _openExampleApp(context, BlocApp()),
             ),
           ],

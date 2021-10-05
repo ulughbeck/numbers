@@ -9,6 +9,7 @@ class BlocApp extends StatelessWidget {
     return Provider(
       create: (_) => NumberBloc(),
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         theme: ThemeData(primarySwatch: Colors.orange),
         title: 'Numbers',
         home: HomePage(),
