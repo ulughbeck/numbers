@@ -5,54 +5,54 @@ import 'package:numbers/app_cn/ui/widgets.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
+  const HomePage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final numberNotifier = Provider.of<NumberNotifier>(context);
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        title: Text('Numbers'),
-      ),
+      appBar: AppBar(title: const Text('Numbers')),
       body: SingleChildScrollView(
         child: Container(
-          padding: EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             children: <Widget>[
-              SizedBox(height: 50),
+              const SizedBox(height: 50),
 
               /// dynamic text output according to state
               Consumer<NumberNotifier>(
                 builder: (context, numberNotifier, child) {
                   switch (numberNotifier.state) {
                     case NumberState.initial:
-                      return NumberResultText(
+                      return const NumberResultText(
                         title: 'Start searching!',
                         titleColor: Colors.orange,
                       );
 
                     case NumberState.loading:
-                      return CircularProgressIndicator();
+                      return const CircularProgressIndicator();
 
                     case NumberState.loaded:
                       return NumberResultText(
-                        title: numberNotifier.numberModel.number.toString(),
+                        title: (numberNotifier.numberModel?.number).toString(),
                         titleSize: 50,
                         titleColor: Colors.amberAccent,
-                        subTitle: numberNotifier.numberModel.text,
+                        subTitle: numberNotifier.numberModel?.text,
                         subTitleSize: 20,
                         subTitleColor: Colors.blueGrey,
                       );
 
                     case NumberState.error:
                       return NumberResultText(
-                        title: numberNotifier.error,
+                        title: numberNotifier.error ?? '',
                         titleColor: Colors.black,
                       );
 
                     //if unexpected state *should not occur idealy
                     default:
-                      return NumberResultText(
+                      return const NumberResultText(
                         title: 'Unexpected error :(',
                         titleColor: Colors.black,
                       );
@@ -60,20 +60,20 @@ class HomePage extends StatelessWidget {
                 },
               ),
 
-              SizedBox(height: 50),
+              const SizedBox(height: 50),
 
               //input
               TextField(
                 keyboardType: TextInputType.number,
-                inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
+                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                 onChanged: numberNotifier.setNumberInput,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   hintText: 'Input any Number',
                 ),
               ),
 
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
 
               //buttons
               Row(
@@ -83,7 +83,7 @@ class HomePage extends StatelessWidget {
                     text: 'Search',
                     onTap: numberNotifier.searchNumber,
                   ),
-                  SizedBox(width: 16),
+                  const SizedBox(width: 16),
                   NumbersButton(
                     bgColor: Colors.blueGrey,
                     text: 'Random Number',

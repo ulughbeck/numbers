@@ -5,6 +5,8 @@ import 'package:numbers/app_bloc/ui/widgets.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
+  const HomePage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final bloc = Provider.of<NumberBloc>(context);
@@ -12,14 +14,14 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: Text('Numbers'),
+        title: const Text('Numbers'),
       ),
       body: SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.all(16.0),
           child: Column(
             children: <Widget>[
-              SizedBox(height: 50),
+              const SizedBox(height: 50),
 
               // dynamic text output according to state
               StreamBuilder<NumberState>(
@@ -30,28 +32,28 @@ class HomePage extends StatelessWidget {
 
                   if (state is NumberInitialState) {
                     return NumberResultText(
-                      title: state.message,
+                      title: state.message ?? '',
                       titleColor: Colors.blue,
                     );
                   } else if (state is NumberLoadingState) {
-                    return CircularProgressIndicator();
+                    return const CircularProgressIndicator();
                   } else if (state is NumberLoadedState) {
                     return NumberResultText(
-                      title: state.numberModel.number.toString(),
+                      title: (state.numberModel?.number).toString(),
                       titleSize: 50,
                       titleColor: Colors.cyan,
-                      subTitle: state.numberModel.text,
+                      subTitle: state.numberModel?.text,
                       subTitleSize: 20,
                       subTitleColor: Colors.blueGrey,
                     );
                   } else if (state is NumberErrorState) {
                     return NumberResultText(
-                      title: state.errorMessage,
+                      title: state.errorMessage ?? '',
                       titleColor: Colors.red,
                     );
                   } else {
                     //if unexpected state *should not occur idealy
-                    return NumberResultText(
+                    return const NumberResultText(
                       title: 'Unexpected error :(',
                       titleColor: Colors.red,
                     );
@@ -59,20 +61,20 @@ class HomePage extends StatelessWidget {
                 },
               ),
 
-              SizedBox(height: 50),
+              const SizedBox(height: 50),
 
               //input
               TextField(
                 keyboardType: TextInputType.number,
-                inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
+                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                 onChanged: bloc.setNumberInput,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   hintText: 'Input any Number',
                 ),
               ),
 
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
 
               //buttons
               Row(
@@ -82,7 +84,7 @@ class HomePage extends StatelessWidget {
                     text: 'Search',
                     onTap: bloc.searchNumber,
                   ),
-                  SizedBox(width: 16),
+                  const SizedBox(width: 16),
                   NumbersButton(
                     bgColor: Colors.deepOrange,
                     text: 'Random Number',

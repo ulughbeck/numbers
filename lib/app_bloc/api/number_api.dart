@@ -5,31 +5,33 @@ import 'package:numbers/app_bloc/api/number_model.dart';
 
 class NumberApi {
   /// API endpoint
-  static const String API = 'http://numbersapi.com';
+  static const String api = 'http://numbersapi.com';
 
   /// API repository
-  Future<NumberModel> searchNumberAPI({String number}) async {
+  Future<NumberModel> searchNumberAPI({String? number}) async {
     try {
       String url;
 
       // compose request url to API and pass number if provided, otherwise request random
-      if (number != null)
-        url = '$API/$number';
-      else
-        url = '$API/random';
+      if (number != null) {
+        url = '$api/$number';
+      } else {
+        url = '$api/random';
+      }
 
       final response = await http.get(
-        url,
+        Uri.parse(url),
         headers: {
           'Content-Type': 'application/json',
         },
       );
 
-      if (response.statusCode == 200)
+      if (response.statusCode == 200) {
         return NumberModel.fromJson(jsonDecode(response.body));
-      else
+      } else {
         throw NumberException(
             'Ups, Network Error Code ${response.statusCode} :(');
+      }
     } catch (e) {
       // handle unexpected exceptions
       print(e);

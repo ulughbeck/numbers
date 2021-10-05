@@ -9,6 +9,7 @@ class CnApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (_) => NumberNotifier(),
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         theme: ThemeData(primarySwatch: Colors.red),
         title: 'Numbers',
         home: HomePage(),
